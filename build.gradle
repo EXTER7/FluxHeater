@@ -23,8 +23,8 @@ def mod_version = "1.1.0.0"
 def mc_version = "1.7.10"
 def build_number = System.getenv("DRONE_BUILD_NUMBER")
 version = mc_version + "-" + mod_version + ( build_number != null ?("-" + build_number): "")
-group = "exter.fluxpads"
-archivesBaseName = "FluxPads"
+group = "exter.fluxheater"
+archivesBaseName = "FluxHeater"
 
 minecraft {
     version = "1.7.10-10.13.4.1448-1.7.10"
