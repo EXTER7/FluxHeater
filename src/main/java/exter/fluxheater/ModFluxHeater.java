@@ -80,6 +80,10 @@ public class ModFluxHeater
     cat.setComment("Per TileEntity burn times. These can be changed all at once by setting the burn times in the 'fluxheater' section, then deleting this section.");
     for(Class<TileEntity> clazz:tiles.keySet())
     {
+      if(clazz == null)
+      {
+        continue;
+      }
       String name = clazz.getName();
       int time = conf.get("burntimes", name, -1).getInt(-1);
       if(time < 0)
