@@ -104,7 +104,7 @@ public class ModFluxHeater
     {
       GameRegistry.addRecipe(new ShapedOreRecipe(
           new ItemStack(item_heater),
-          "NRC",
+          "CRC",
           "IBI",
           "IGI",
           'I', "ingotIron",
