@@ -19,7 +19,7 @@ public class ItemFluxHeater extends ItemEnergyContainer implements IEnergyContai
   {
     super(FluxHeaterConfig.capacity, FluxHeaterConfig.charge_rate, FluxHeaterConfig.capacity);
     setUnlocalizedName("fluxHeater");
-    setTextureName("fluxheater");
+    setTextureName("fluxheater:flux_heater");
     setMaxStackSize(1);
   }
 
