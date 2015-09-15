@@ -31,12 +31,11 @@ public class FluxHeaterConfig
   
   static public void load(Configuration config)
   {
-    //TODO balance these values.
-    burn_time = config.get("fluxheater", "burn_time", 100).getInt(100); 
-    burn_time_fluid = config.get("fluxheater", "burn_time.fuidtile", 50).getInt(50); 
-    burn_time_energy = config.get("fluxheater", "burn_time.energytile", 25).getInt(25);
-    burn_cost = config.get("fluxheater", "burn_cost", 1000).getInt(1000); 
-    capacity = config.get("fluxheater", "fluxpad.basic.capacity", 20000).getInt(20000);    
-    charge_rate = config.get("fluxheater", "charge_rate", 200).getInt(200); 
+    burn_time = config.get("fluxheater", "burn_time", 25,"Default cycle burn time in ticks.").getInt(25); 
+    burn_time_fluid = config.get("fluxheater", "burn_time.fuidtile", 22, "Default cycle burn time in ticks (for fluid TEs).").getInt(22); 
+    burn_time_energy = config.get("fluxheater", "burn_time.energytile", 20, "Default cycle burn time in ticks (for RF TEs).").getInt(20);
+    burn_cost = config.get("fluxheater", "burn_cost", 1000, "How much RF each cycle consumes.").getInt(1000); 
+    capacity = config.get("fluxheater", "fluxpad.basic.capacity", 50000, "How much RF the Flux Heater can hold.").getInt(50000);    
+    charge_rate = config.get("fluxheater", "charge_rate", 250, "Maximun RF/t rate in which the Flux Heater can charge.").getInt(250); 
   }
 }

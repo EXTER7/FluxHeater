@@ -20,6 +20,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.fluids.IFluidHandler;
@@ -75,10 +76,12 @@ public class ModFluxHeater
     Map<Class<TileEntity>,String> tiles = (Map<Class<TileEntity>,String>)ObfuscationReflectionHelper.getPrivateValue(TileEntity.class, null, 2);
 
     // Assign default values depending on which interfaces TileEntity implements.
+    ConfigCategory cat = conf.getCategory("burntimes");
+    cat.setComment("Per TileEntity burn times. These can be changed all at once by setting the burn times in the 'fluxheater' section, then deleting this section.");
     for(Class<TileEntity> clazz:tiles.keySet())
     {
       String name = clazz.getName();
-      int time = conf.get("tile_entity", name, -1).getInt(-1);
+      int time = conf.get("burntimes", name, -1).getInt(-1);
       if(time < 0)
       {
         if(IEnergyProvider.class.isAssignableFrom(clazz)) // RF generator tiles
@@ -94,7 +97,7 @@ public class ModFluxHeater
       }
       log.info("Automaticaly added '" + name + "' with burn time of " + time);
 
-      conf.getCategory("tile_entity").put(name, new Property(name, String.valueOf(time),Property.Type.INTEGER));
+      cat.put(name, new Property(name, String.valueOf(time),Property.Type.INTEGER));
       FluxHeaterConfig.burn_times.put(clazz, time);
     }
     conf.save();
@@ -104,27 +107,25 @@ public class ModFluxHeater
     {
       GameRegistry.addRecipe(new ShapedOreRecipe(
           new ItemStack(item_heater),
-          "CRC",
+          "CCC",
           "IBI",
           "IGI",
           'I', "ingotIron",
-          'C', "ingotCuproNickel",
+          'C', "ingotCupronickel",
           'G', "ingotGold",
-          'B', Blocks.redstone_block,
-          'R', Items.redstone).setMirrored(true));
+          'B', Blocks.redstone_block));
     } else if(OreDictionary.getOres("ingotCopper").size() > 0 && OreDictionary.getOres("ingotNickel").size() > 0)
     {
       GameRegistry.addRecipe(new ShapedOreRecipe(
           new ItemStack(item_heater),
-          "NRC",
+          "CNC",
           "IBI",
           "IGI",
           'I', "ingotIron",
           'C', "ingotCopper",
           'N', "ingotNickel",
           'G', "ingotGold",
-          'B', Blocks.redstone_block,
-          'R', Items.redstone).setMirrored(true));
+          'B', Blocks.redstone_block));
     } else
     {
       GameRegistry.addRecipe(new ShapedOreRecipe(
